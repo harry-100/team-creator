@@ -1,0 +1,34 @@
+{
+  "name": "team-profile-generator",
+  "version": "1.0.0",
+  "description": "given user input, it generates team profile",
+  "main": "index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/harry-100/team-creator.git"
+  },
+  "keywords": [
+    "nodejs",
+    "javascript",
+    "html",
+    "css"
+  ],
+  "author": "Harry",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/harry-100/team-creator/issues"
+  },
+  "homepage": "https://github.com/harry-100/team-creator#readme",
+  "devDependencies": {
+    "jest": "^27.0.6"
+  },
+  "dependencies": {
+    "enquirer": "^2.3.6"
+  }
+}
