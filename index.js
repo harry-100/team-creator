@@ -2,6 +2,7 @@ const inquirer = require('inquirer');
 const employeeArr = [];
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
+const Intern = require('./lib/Intern');
 
 const managerInfo = () => {
     return inquirer.prompt([
@@ -38,7 +39,7 @@ const managerInfo = () => {
 })
 };
 
-const engineerInfo = () => {
+const employeeInfo = () => {
     // if(!employeeInfo.engineers){
     //     employeeInfo.engineers = [];
     // }
@@ -52,12 +53,12 @@ const engineerInfo = () => {
         {
         type: 'input',
         name: 'name',
-        message: 'Please enter the name of the employee.'
+        message: 'Please enter the name of the employee'
         },
         {
         type: 'input',
         name: 'id',
-        message: 'Please enter the id '
+        message: 'Please enter the id'
         },
         {
         type: 'input',
@@ -67,26 +68,44 @@ const engineerInfo = () => {
         {
         type: 'input',
         name: 'github',
-        message: 'What is your office github username?'
+        message: 'Please enter your github username.',
+        when: (input) => input.role === 'engineer',
+        },
+        {
+        type: 'input',
+        name: 'school',
+        message: 'Which school did you graduate from?',
+        when: (input) => input.role === 'intern'    
         },
         {
         type: 'confirm',
-        name: 'confirmAddEngineer',
-        message: 'Do you want to add more engineers?',
+        name: 'confirmAddEmployee',
+        message: 'Do you want to add more employees?',
         default: false
         }
 
 ])
-.then(engineerData => {
-    const {name, id, email, github} = engineerData;
-    engineer = new Engineer(name, id, email, github);
-    employeeArr.push(engineer);
-    console.log('employee Arr=', employeeArr);
-    // employeeInfo.engineers.push(engineerData);
-    if(engineerData.confirmAddEngineer){
-        return engineerInfo();
+.then(employeeData => {
+    if (employeeData.role === 'engineer'){
+        const {name, id, email, github} = employeeData;
+        engineer = new Engineer(name, id, email, github);
+        employeeArr.push(engineer); 
+
     }
-    console.log('employeeArr-eng', employeeArr);
+    else {
+        const {name, id, email, school} = employeeData;
+        intern = new Intern(name, id, email, school);
+        employeeArr.push(intern);
+    }
+    // const {name, id, email, github} = engineerData;
+    // employee = new Engineer(name, id, email, github);
+    // employeeArr.push(employee);
+    // console.log('employee Arr=', employeeArr);
+    // employeeInfo.engineers.push(engineerData);
+    if(employeeData.confirmAddEmployee){
+        return employeeInfo();
+    }
+    // console.log('employeeArr-eng', employeeArr);
     return employeeArr;
 })
 };
@@ -95,11 +114,12 @@ const engineerInfo = () => {
 
 
 managerInfo()
-.then(engineerInfo)
+.then(employeeInfo)
 // .then(internInfo)
 .then
-(employeeInfo => {
-console.log('final-data', employeeInfo);
+(employeeData => {
+console.log('final-data', employeeData);
+console.log('employee Array', employeeArr);
  })
 
 
