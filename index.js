@@ -1,5 +1,6 @@
 //  Importing required node modules
 const inquirer = require('inquirer');
+const emailValidator = require('email-validator');
 
 const generateHtml = require('./src/generateHtml');
 const writeFile = require('./src/createFIle');
@@ -15,7 +16,16 @@ const managerInfo = () => {
         {
         type: 'input',
         name: 'name',
-        message: 'Please enter the name of the Manager.'
+        message: 'Please enter the name of the Manager.',
+        /* validate: nameInput => {
+            if(typeof name == 'string'){
+                return true;
+            }
+            else {
+                console.log('Please enter your name correctly');
+                return false;
+            }
+        } */
     },
     {
         type: 'input',
@@ -25,12 +35,32 @@ const managerInfo = () => {
     {
         type: 'input',
         name: 'email',
-        message: 'What is your email id?'
+        message: 'What is your email id?',
+        validate: emailInput => {
+            if(emailValidator.validate(emailInput)) {
+                return true;
+            }
+            else {
+                console.log("please enter a valid email");
+                return false;
+            }
+        }
     },
     {
         type: 'input',
         name: 'phoneNumber',
-        message: 'What is your office phone number?'
+        message: 'What is your office phone number?',
+        validate: phoneInput => {
+            if(isNaN(phoneInput)){
+                console.log('Please enter a valid phone number');
+                console.log("phone-", phoneInput);
+                return false;
+            }
+            else {
+                return true;
+            }
+           
+        }
     }
 
 ])
@@ -43,9 +73,6 @@ const managerInfo = () => {
 };
 //  capturing engineer and intern information
 const employeeInfo = () => {
-    // if(!employeeInfo.engineers){
-    //     employeeInfo.engineers = [];
-    // }
     return inquirer.prompt([
         {
         type: 'list',
@@ -66,7 +93,16 @@ const employeeInfo = () => {
         {
         type: 'input',
         name: 'email',
-        message: 'What is your email id?'
+        message: 'What is your email id?',
+        validate: emailInput => {
+            if(emailValidator.validate(emailInput)) {
+                return true;
+            }
+            else {
+                console.log("please enter a valid email");
+                return false;
+            }
+        }
         },
         {
         type: 'input',

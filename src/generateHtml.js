@@ -4,7 +4,7 @@
 const generateManager = function(manager){
     return`
             <div class="col">
-                <div class="card border-dark m-3 mx-auto bg-info bg-opacity-25" style="width: 18rem;">
+                <div class="card border-dark m-3 mx-auto bg-info" style="width: 18rem;">
                     <div class="card-body bg-primary mt-3 text-light">
                       <h5 class="card-title">${manager.name}</h5>
                       <h6 class="card-text">Manager</h6>
@@ -23,7 +23,7 @@ const generateManager = function(manager){
 const generateEngineer = function(engineer) {
     return`
             <div class="col">
-                <div class="card border-dark m-3 mx-auto bg-info bg-opacity-25" style="width: 18rem;">
+                <div class="card border-dark m-3 mx-auto bg-info" style="width: 18rem;">
                     <div class="card-body bg-primary mt-3 text-light">
                       <h5 class="card-title">${engineer.name}</h5>
                       <h6 class="card-text">Engineer</h6>
@@ -43,7 +43,7 @@ const generateIntern = function(intern) {
     return`
 
             <div class="col">
-                <div class="card border-dark m-3 mx-auto bg-info bg-opacity-25" style="width: 18rem;">
+                <div class="card border-dark m-3 mx-auto bg-info" style="width: 18rem;">
                     <div class="card-body bg-primary mt-3 text-light">
                       <h5 class="card-title">${intern.name}</h5>
                       <h6 class="card-text">Intern</h6>
