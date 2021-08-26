@@ -1,3 +1,5 @@
+const generateHtml = require('./src/generateHtml');
+const writeFile = require('./src/createFIle');
 const inquirer = require('inquirer');
 const employeeArr = [];
 const Manager = require('./lib/Manager');
@@ -29,12 +31,9 @@ const managerInfo = () => {
 
 ])
 .then(managerInfo => {
-    console.log('phone=', managerInfo.phoneNumber);
     const {name, id, email, phoneNumber} = managerInfo;
     const manager = new Manager(name, id, email, phoneNumber);
-    console.log('manager', manager);
     employeeArr.push(manager);
-    console.log('employeeArr', employeeArr);
 
 })
 };
@@ -48,7 +47,7 @@ const employeeInfo = () => {
         type: 'list',
         name:'role',
         message: 'Please choose the role of the employee',
-        choices: ['engineer', 'intern']
+        choices: ['Engineer', 'Intern']
         },
         {
         type: 'input',
@@ -69,13 +68,13 @@ const employeeInfo = () => {
         type: 'input',
         name: 'github',
         message: 'Please enter your github username.',
-        when: (input) => input.role === 'engineer',
+        when: (input) => input.role === 'Engineer',
         },
         {
         type: 'input',
         name: 'school',
         message: 'Which school did you graduate from?',
-        when: (input) => input.role === 'intern'    
+        when: (input) => input.role === 'Intern'    
         },
         {
         type: 'confirm',
@@ -86,22 +85,21 @@ const employeeInfo = () => {
 
 ])
 .then(employeeData => {
-    if (employeeData.role === 'engineer'){
+    if (employeeData.role === 'Engineer'){
         const {name, id, email, github} = employeeData;
         engineer = new Engineer(name, id, email, github);
         employeeArr.push(engineer); 
-
     }
     else {
         const {name, id, email, school} = employeeData;
         intern = new Intern(name, id, email, school);
         employeeArr.push(intern);
     }
-    // const {name, id, email, github} = engineerData;
-    // employee = new Engineer(name, id, email, github);
-    // employeeArr.push(employee);
-    // console.log('employee Arr=', employeeArr);
-    // employeeInfo.engineers.push(engineerData);
+/*     const {name, id, email, github} = engineerData;
+    employee = new Engineer(name, id, email, github);
+    employeeArr.push(employee);
+    console.log('employee Arr=', employeeArr);
+    employeeInfo.engineers.push(engineerData); */
     if(employeeData.confirmAddEmployee){
         return employeeInfo();
     }
@@ -110,16 +108,33 @@ const employeeInfo = () => {
 })
 };
 
-
+/* const writeFile = data => {
+    fs.writeFile('./dist/index.html', data, err => {
+        // if there is an error 
+        if (err) {
+            console.log(err);
+            return;
+        // when the profile has been created 
+        } else {
+            console.log("Your team profile has been successfully created! Please check out the index.html")
+        }
+    })
+};  */
 
 
 managerInfo()
 .then(employeeInfo)
-// .then(internInfo)
+
 .then
-(employeeData => {
-console.log('final-data', employeeData);
+(employeeArr => {
 console.log('employee Array', employeeArr);
+return generateHtml(employeeArr);
+ })
+ .then(pageHtml => {
+     return writeFile(pageHtml);
+ })
+ .catch(err => {
+     console.log(err);
  })
 
 
