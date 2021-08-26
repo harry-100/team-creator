@@ -1,11 +1,15 @@
+//  Importing required node modules
+const inquirer = require('inquirer');
+
 const generateHtml = require('./src/generateHtml');
 const writeFile = require('./src/createFIle');
-const inquirer = require('inquirer');
-const employeeArr = [];
+//  Importing classes
 const Manager = require('./lib/Manager');
 const Engineer = require('./lib/Engineer');
 const Intern = require('./lib/Intern');
+const employeeArr = [];
 
+// capturing manager information
 const managerInfo = () => {
     return inquirer.prompt([
         {
@@ -37,7 +41,7 @@ const managerInfo = () => {
 
 })
 };
-
+//  capturing engineer and intern information
 const employeeInfo = () => {
     // if(!employeeInfo.engineers){
     //     employeeInfo.engineers = [];
@@ -95,36 +99,17 @@ const employeeInfo = () => {
         intern = new Intern(name, id, email, school);
         employeeArr.push(intern);
     }
-/*     const {name, id, email, github} = engineerData;
-    employee = new Engineer(name, id, email, github);
-    employeeArr.push(employee);
-    console.log('employee Arr=', employeeArr);
-    employeeInfo.engineers.push(engineerData); */
+
     if(employeeData.confirmAddEmployee){
         return employeeInfo();
     }
-    // console.log('employeeArr-eng', employeeArr);
     return employeeArr;
 })
 };
 
-/* const writeFile = data => {
-    fs.writeFile('./dist/index.html', data, err => {
-        // if there is an error 
-        if (err) {
-            console.log(err);
-            return;
-        // when the profile has been created 
-        } else {
-            console.log("Your team profile has been successfully created! Please check out the index.html")
-        }
-    })
-};  */
-
-
+// using captured information to generate html output
 managerInfo()
 .then(employeeInfo)
-
 .then
 (employeeArr => {
 console.log('employee Array', employeeArr);
@@ -136,57 +121,4 @@ return generateHtml(employeeArr);
  .catch(err => {
      console.log(err);
  })
-
-
-
-
-
-
-
-
-/* ------------------------------------------------------------------ */
-
-
-const internInfo = employeeInfo => {
-    if(!employeeInfo.interns){
-        employeeInfo.interns = [];
-    }
-    return inquirer.prompt([
-        {
-            type: 'input',
-            name: 'name',
-            message: 'What is your name'
-        },
-        {
-            type: 'input',
-            name: 'internId',
-            message: 'What is your employee ID?'
-        },
-        {
-            type: 'input',
-            name: 'email',
-            message: 'What is your email ID?'
-        },
-        {
-            type: 'input',
-            name: 'school',
-            message: 'Which school did you graduate from?'
-        },
-        {
-            type: 'confirm',
-            name: 'confirmAddIntern',
-            message: 'Do you want to add more intern?',
-            default: false
-        }
-    ])
-    .then(internData => {
-        employeeInfo.interns.push(internData);
-        if(internData.confirmAddIntern){
-            return internInfo(employeeInfo);
-        }
-        return employeeInfo;
-    })
-}
-
-
 

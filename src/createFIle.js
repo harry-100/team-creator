@@ -1,5 +1,7 @@
+//  import the required node module
 const fs = require('fs');
 
+//  function to write html data to the file
 const writeFile = data => {
     fs.writeFile('./dist/index.html', data, err => {
         // if there is an error 
@@ -8,7 +10,7 @@ const writeFile = data => {
             return;
         // when the profile has been created 
         } else {
-            console.log("Your team profile has been successfully created! Please check out the index.html")
+            console.log("File created successfully")
         }
     })
 }; 

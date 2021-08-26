@@ -1,5 +1,5 @@
 
-// create card to display manager information
+// create infobox to display manager information
 
 const generateManager = function(manager){
     return`
@@ -19,7 +19,7 @@ const generateManager = function(manager){
     `
 }
 
-//  create card to display engineer information
+//  create infobox to display engineer information
 const generateEngineer = function(engineer) {
     return`
             <div class="col">
@@ -38,7 +38,7 @@ const generateEngineer = function(engineer) {
     `
 }
 
-//  create card to display intern information
+//  create infobox to display intern information
 const generateIntern = function(intern) {
     return`
 
@@ -59,9 +59,9 @@ const generateIntern = function(intern) {
 }
 
 
-//generate 
+//generate html page
 
-const generateTeamPage = function(displayCards){
+const generateTeamPage = function(infobox){
     return `
     
     <!DOCTYPE html>
@@ -83,7 +83,7 @@ const generateTeamPage = function(displayCards){
         </div>
         <div class="container">
             <div class="row">
-            ${displayCards}
+            ${infobox}
             </div>
         </div>
     </section>
@@ -92,7 +92,7 @@ const generateTeamPage = function(displayCards){
     
     `;
 }
-// generate HTML page
+// generating infobox based on the role of the employee
 generateHtml = (data) => {
     displayTeam = [];
 
@@ -112,9 +112,10 @@ generateHtml = (data) => {
             displayTeam.push(displayIntern);
         }
     }
-    const displayCards = displayTeam.join('');
+    const infobox = displayTeam.join('');
 
-    const generateTeam = generateTeamPage(displayCards);
+    const generateTeam = generateTeamPage(infobox);
     return generateTeam;
 }
+
 module.exports = generateHtml;
