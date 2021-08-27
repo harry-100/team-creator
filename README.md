@@ -1,7 +1,7 @@
 # team-creator
 ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
 
-## [Walkthrough Video](https://drive.google.com/file/d/14WiXhSgW0He9_TS6H7k_-zp0GM_j8dwR/view?usp=sharing)
+## [Walkthrough Video](https://drive.google.com/file/d/1y9gop4IfVUO8liNUy3Lfy3VBCaMqK-WT/view)
 
 ## [GitHub Url](https://github.com/harry-100/team-creator)
 
@@ -30,4 +30,4 @@ This application is covered under [MIT](
 ![image-1](./images/image-1.png)
 
 ## Questions
-If you need more information, please checkout my [github account](https://github.com/harry-100). You can also reach me via [email](mailto:harvinder.shah@gmail.com?subject=README%20Generator).
+If you need more information, please checkout my [github account](https://github.com/harry-100). You can also reach me via [email](mailto:harvinder.shah@gmail.com?subject=team-profile).
